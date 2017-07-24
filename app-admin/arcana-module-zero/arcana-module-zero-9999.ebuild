@@ -15,7 +15,7 @@ else
 fi
 
 LICENSE="GPL-2"
-SLOT="0"
+SLOT="9999"
 KEYWORDS="*"
 IUSE=""
 
@@ -30,7 +30,11 @@ src_unpack() {
 }
 
 src_install() {
-	exeinto /usr/share/arcana/modules/${PN}/${PV}/
+	dodir /etc/arcana/modules/${PN}/${PV}
+	dodir /usr/share/arcana/modules-config/${PN}/${PV}
+	insinto /usr/share/arcana/modules-config/${PN}/${PV}
+	doins $S/modules-config/*
+	exeinto /usr/share/arcana/modules/${PN}/${PV}
 	doexe $S/modules/*
 	dosym ../share/arcana/modules/${PN}/${PV}/arczero /usr/sbin/arczero
 }
