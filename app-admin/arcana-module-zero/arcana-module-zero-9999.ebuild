@@ -19,5 +19,19 @@ SLOT="0"
 KEYWORDS="*"
 IUSE=""
 
-DEPEND=""
-RDEPEND="${DEPEND}"
+RDEPEND="dev-lang/python:3"
+
+src_unpack() {
+	if [ ${PV} == "9999" ] ; then
+		git-r3_src_unpack
+	else
+		unpack ${A}
+	fi
+}
+
+src_install() {
+	exeinto /usr/share/arcana/modules/${PN}/${PV}/
+	doexe $S/modules/*
+	dosym ../share/arcana/modules/${PN}/${PV}/arczero /usr/sbin/arczero
+}
+
